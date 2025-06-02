@@ -1,11 +1,3 @@
-The image is a slide from a presentation, likely about computer architecture or operating systems. The title, in green, is "Functions of I/O Module".
+The image is a slide from a presentation, likely about computer architecture or systems. The title, in green, is "Functions of I/O Module".
 
-Below the title, there is a list of functions, each preceded by a red bullet point. The first function is "Processor communication", followed by three sub-bullets: "Data transfer between the processor and an I/O module", "Accepting and decoding commands sent by the processor", and "Reporting of current status".
-
-The next function is "Device communication", followed by the statement "It needs to be able to perform standard device communications, such as reporting of status."
-
-The third function is "Control and timing", followed by the statement "An I/O module needs to be capable of managing data flow between a computer's internal resources and any connected external devices."
-
-The fourth function is "Data buffering", followed by the statement "A crucial function that manages the speed discrepancy that exists between the speed of transfer of data between the processor and memory and peripheral devices."
-
-The final function listed is "Error detection", followed by the statement "Detecting errors, whether mechanical (such as a printer experiencing a paper jam) or data based, and reporting them to the processor."
+Below the title, there is a list of functions, each preceded by a red bullet point. The functions listed are: Processor communication, which includes data transfer between the processor and an I/O module, accepting and decoding commands sent by the processor, and reporting of current status. Device communication, which is described as needing to be able to perform standard device communications, such as reporting of status. Control and timing, which states that an I/O module needs to be capable of managing data flow between a computer's internal resources and any connected external devices. Data buffering, which is described as a crucial function that manages the speed discrepancy that exists between the speed of transfer of data between the processor and memory and peripheral devices. Finally, Error detection, which involves detecting errors, whether mechanical (such as a printer experiencing a paper jam) or data based, and reporting them to the processor.
