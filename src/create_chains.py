@@ -4,6 +4,7 @@ from langchain.chains import create_retrieval_chain
 
 
 def chainer(vectorstore,llm):
+    #Links the prompt, retriever and the LLM
     prompt = ChatPromptTemplate.from_template("""
     Use the following context to answer the question at the end. 
     Answer in paragraphs with no formatting. Headings can be shown with the help of colons.

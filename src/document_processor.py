@@ -3,7 +3,8 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.schema import Document
 from langchain.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceBgeEmbeddings
-
+#This function splits, and embeds all the documents present in the corresponding text files.
+#Returns a vector store
 def process_documents(output_path,embeddings):
     splitter = RecursiveCharacterTextSplitter()
     file_names = sorted([f for f in os.listdir(output_path) if f.endswith('.txt')])

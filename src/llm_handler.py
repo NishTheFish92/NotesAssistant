@@ -4,12 +4,12 @@ import base64
 from tenacity import retry, stop_after_attempt, wait_exponential
 import os
 
-
 @retry(
     stop=stop_after_attempt(3),  # Try 3 times
     wait= wait_exponential(multiplier=1, min=4, max=10),  # Wait between 4-10 seconds, increasing exponentially
 )
 def img_to_llm(image_file_path,llm):
+    #Passes an image to the LLM and then returns a description of the image
     try:
         with open(image_file_path, "rb") as image_file:
             image_data = image_file.read()
@@ -32,8 +32,8 @@ def img_to_llm(image_file_path,llm):
     except Exception as e:
         print(f"Attempt failed: {str(e)}")
         raise
-
 def img2txt(output_path,n,llm):
+    #Sends the description of the images into a text file
     for i in range(n):
         llm_output = ""
         image_filename = os.path.join(output_path,f'page_{i+1:03}.png')
