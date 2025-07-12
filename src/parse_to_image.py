@@ -2,11 +2,10 @@ from pdf2image import convert_from_path
 import os
 import PyPDF2
 
-def toimages(pdf_path):
+def toimages(pdf_path,output_path):
     #converts all the pages in the PDF to individual images
     pdflen = 0
-    output_path = './output_images'
-    with open('../PDFs/Mod5.pdf', "rb") as f:
+    with open(pdf_path, "rb") as f:
             reader = PyPDF2.PdfReader(f)
             pdflen = len(reader.pages)
     os.makedirs(output_path,exist_ok=True)

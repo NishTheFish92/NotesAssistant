@@ -1,0 +1,10 @@
+The image is a slide or presentation page with a white background. At the top, in large, dark green text, is the title "Asynchronous Data Transfer Methods."
+
+Below the title, in blue text, is the heading "Methods to accomplish Asynchronous Data Transfer." Underneath this heading is a numbered list of four methods, each on a separate line:
+
+i. Source Initiated Strobe for Data Transfer.
+ii. Destination Initiated Strobe for Data Transfer.
+iii. Source Initiated Transfer Using Handshaking.
+iv. Destination Initiated Transfer Using Handshaking.
+
+In the list, the words "Strobe" and "Handshaking" are written in red.

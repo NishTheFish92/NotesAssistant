@@ -1,0 +1,9 @@
+The image is a diagram explaining asynchronous data transfer methods, specifically source-initiated transfer using handshaking. The title is "Asynchronous Data Transfer Methods" in large, green font.
+
+The image is divided into three sections: a textual explanation on the left, and three diagrams on the right. The textual explanation begins with "iii) Source Initiated Transfer Using Handshaking" and describes the process in four steps. It explains that the source initiates the transfer, and the process involves signals: DATA VALID (indicating valid data on the bus) and DATA ACCEPTED (indicating data has been accepted). The steps detail the source placing data, the destination accepting it, and the subsequent disabling of the signals.
+
+The first diagram, labeled "(a) Block Diagram," shows a "Source Unit" and a "Destination Unit" connected by lines representing "Data Bus," "Data Valid," and "Data Accepted" signals.
+
+The second diagram, labeled "(b) Timing Diagram," illustrates the timing of the "Data bus," "Data valid," and "Data Accepted" signals over time. It shows how the signals change state during the data transfer process.
+
+The third diagram, labeled "(c) Sequence Diagram (Sequence of events)," shows the sequence of events between the "Source Unit" and "Destination Unit." It shows the source unit placing data on the bus and enabling the data valid signal, and the destination unit reading the data and enabling the data accepted signal. It then shows the source unit disabling the data valid signal and invalidating the data on the bus, and the destination unit disabling the data accepted signal and returning to its initial state.

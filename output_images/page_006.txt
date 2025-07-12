@@ -1,0 +1,7 @@
+The image is a slide or presentation page with a white background. The title "Synchronous Data Transfers" is at the top, written in a dark green color.
+
+Below the title, there are three bullet points. The first bullet point states: "If the registers in the I/O interface share a common clock with CPU registers, then transfer between the two units is said to be Synchronous." The words "registers in the I/O interface share a common clock with CPU registers" are in red, and the word "Synchronous" is in purple.
+
+The second bullet point says: "It usually occur when peripherals are located within the same computers as the CPU."
+
+The third bullet point says: "It shares a common clock," with the words "shares a common clock" in red. All other text is in black.

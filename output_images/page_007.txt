@@ -1,0 +1,7 @@
+The image is a slide or document explaining asynchronous data transfers. The title "Asynchronous Data Transfers" is in a larger, green font.
+
+The document then lists several bullet points. The first bullet point defines asynchronous data transfer as a method of data transmission where data is sent in a non-continuous, non-synchronous manner, meaning data is sent at irregular intervals without specific timing or synchronization between devices. The phrases "where data is sent in a non-continuous, non-synchronous manner" is in red.
+
+The second bullet point states that asynchronous data transfer between two independent units requires control signals to be transmitted between the communicating units so that the time can be indicated at which they send data. The word "control signals" is in red.
+
+The third bullet point is "Control signals" in bold. This bullet point has two sub-bullets. The first sub-bullet is "Strobe control" in bold, followed by a description: A strobe pulse is supplied by one unit to indicate to the other unit when the transfer has to occur. The phrase "A strobe pulse is supplied by one unit" is in red. The second sub-bullet is "Handshaking" in bold, followed by a description: This method is commonly used to accompany each data item being transferred with a control signal that indicates data in the bus. The unit receiving the data item responds with another signal to acknowledge receipt of the data. The phrase "The unit receiving the data item responds with another signal to acknowledge receipt" is in red.

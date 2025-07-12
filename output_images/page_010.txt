@@ -1,0 +1,7 @@
+The image is a slide about asynchronous data transfer methods, specifically "Destination Initiated Strobe for Data Transfer." The title "Asynchronous Data Transfer Methods" is in large, green font. Below that, "ii) Destination Initiated Strobe for Data Transfer" is in blue.
+
+A list of steps is provided, describing the process: The destination unit activates a strobe pulse. The source responds by placing the requested data on the bus. The data must be valid and available for a short time so the destination can accept it. The destination unit disables the strobe pulse, and the source removes the data from the bus.
+
+To the right of this list, there is another list of steps, numbered (i), (ii), and (iii). (i) states that the destination turns on the strobe signal to ensure the source puts fresh data on the data bus. (ii) states that the source, upon seeing the ON signal, puts fresh data on the data bus. (iii) states that the destination reads the data from the data bus, and the strobe signal turns OFF. A note in red says "Fig. shows that first strobe signal gets active then data is put on the data bus."
+
+Below the lists, there is a block diagram labeled "(a) Block Diagram." It shows a "Source Unit" connected to a "Destination Unit" via a "Data Bus" and a "Strobe" line. To the right of the block diagram is a timing diagram showing the strobe signal going high before the data bus becomes valid. The data bus is labeled "Valid Data."

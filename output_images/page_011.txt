@@ -1,0 +1,7 @@
+The image is a slide presentation with a white background. The title, "Asynchronous Data Transfer Methods," is written in green.
+
+The slide lists problems faced in strobe-based asynchronous data transfer. The main heading is in red. The first bullet point is "No Acknowledgement for Data Sent/Received," written in purple.
+
+The next two bullet points describe issues with source-initiated and destination-initiated strobes, noting that there is no surety that the data has been read or put on the data bus, respectively.
+
+The final bullet point, written in green, states that "This problem is overcome by Handshaking."
