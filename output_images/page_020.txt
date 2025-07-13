@@ -1,9 +1,0 @@
-The image is a slide with the title "Advantages of Buffering" in green. Below the title, there are several bullet points listing the advantages of buffering.
-
-The first bullet point states that buffering allows uniform disk access. The word "uniform" is in red. The second bullet point says that it simplifies system design, with the word "simplifies" in red.
-
-The third bullet point explains that the system places no data alignment restrictions on user processes doing I/O. It further elaborates that by copying data from user buffers to system buffers and vice versa, the kernel eliminates the need for special alignment of user buffers, making user programs simpler and more portable. The phrase "no data alignment restrictions" and "user programs simpler and more portable" are in red.
-
-The fourth bullet point mentions that buffering reduces the amount of disk traffic, increases the overall system throughput, and decreases response time. The words "increases" and "decreases" are in red.
-
-The final bullet point states that the buffer algorithms help ensure file system integrity, with the phrase "file system integrity" in red. The background of the slide is white.

@@ -1,5 +1,0 @@
-The image is a slide or document page, likely from a course on computer architecture and organization. At the top, in green text, is "BCSE205L" followed by "Computer Architecture and Organization". Below that, in a reddish-brown color, is "Module 5 – Interfacing and Communication".
-
-A table is present, outlining the contents of Module 5. The table has three columns: "Module:5", "Interfacing and Communication", and "5 Hours". The content listed under "Interfacing and Communication" includes I/O fundamentals (handshaking, buffering, I/O Modules), I/O techniques (Programmed I/O, Interrupt-driven I/O, Direct Memory Access, Direct Cache Access), Interrupt structures (Vectored and Prioritized-interrupt overhead), Buses (Synchronous and asynchronous), and Arbitration.
-
-At the bottom of the image, in blue text, is "Dr. C.R.Dhivyaa", followed by "Assistant Professor", "School of Computer Science and Engineering", and "Vellore Institute of Technology, Vellore".

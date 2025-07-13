@@ -1,5 +1,0 @@
-The image is a slide presentation about types of buffering, specifically focusing on single buffering. The title "Types of Buffering" is at the top in a large, dark green font.
-
-Below the title, there's a section dedicated to "Single buffering" with a bullet point. The text explains that in single buffering, only one buffer is used to transfer data between two devices. It further elaborates that the producer puts a block of data into the buffer, and then the consumer consumes it. A key point is highlighted: the processor only produces more data when the buffer is empty.
-
-Two diagrams illustrate the concept. The first diagram shows "No buffering" with an I/O Device sending data "In" to the Operating System, which then sends data to the User Process. The second diagram shows "Single I/O Buffering" with an I/O Device sending data "In" to a "Single Buffer" within the Operating System. The data then "Moves" to the "Consumer" within the User Process. The diagrams use light blue rectangles to represent the components and black arrows to show the data flow. The labels "Operating System" and "User Process" are above the respective components in the diagrams.

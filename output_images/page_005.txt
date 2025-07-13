@@ -1,7 +1,0 @@
-The image is a slide or document page with the title "Data Transfer" in large, green font. Below the title, there are three bulleted sections, each describing a different type of data transfer.
-
-The first section, titled "DATA TRANSFER" in blue, defines it as the physical transfer of data (a digital bit stream) over a point-to-point or point-to-multipoint communication channel. It also provides examples of channels, such as copper wires, optical fibers, and wireless communication channels. The phrase "a digital bit stream" and "point-to-point or point-to-multipoint communication channel" are in red.
-
-The second section, titled "SYNCHRONOUS DATA TRANSFER" in blue, describes the transfer of data between two devices on a network where they both carry out a predetermined set of interactions based on a common clock pulse. The phrase "common clock pulse" is in red.
-
-The third section, titled "ASYNCHRONOUS DATA TRANSFER" in blue, describes the transfer of data between two devices on a network where they both carry out a predetermined set of interactions based on a private clock pulse. The phrase "private clock pulse" is in red.

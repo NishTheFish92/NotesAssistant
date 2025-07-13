@@ -1,7 +1,0 @@
-The image is a diagram illustrating CPU and I/O module organization. The title "CPU & I/O Module Organization" is written in green.
-
-On the left side of the image, there are bullet points describing key aspects of the organization. These points include: "Many I/O devices," "Each device - unique address," "Processor- Command-address of IO device," and "Processor, Main memory, IO - Share a common bus." The bullet points are in red.
-
-On the right side, there are two diagrams. The top diagram shows a CPU connected to an I/O module. The CPU is represented as an orange rectangle, and the I/O module is also an orange rectangle containing blue rectangles labeled "Interface," "Controller," and "Devices." Arrows indicate the flow of data, address, and control signals between the CPU and the I/O module.
-
-The bottom diagram shows a more detailed view of the Systems Bus Interface and External Device Interface. It includes components like Data Register, Status/Control Register, Input Output Logic, and External Device Interface Logic. Arrows indicate the flow of data, address, status, and control signals within the system.

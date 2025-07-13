@@ -1,12 +1,19 @@
 from src import *
 import PyPDF2
+import argparse
+
+
 def main():
-    pdf_path = './PDFs/Mod5.pdf'  # Change as needed
+    parser = argparse.ArgumentParser(description="Train NotesAssistant with a PDF file.")
+    parser.add_argument("pdf_path", type=str, help="Path to the PDF file")
+    args = parser.parse_args()
+
+    pdf_path = args.pdf_path
     output_path = './output_images'
-    num_pages = 20  
-    #with open('../PDFs/Mod5.pdf', "rb") as f:
-    #        reader = PyPDF2.PdfReader(f)
-    #        num_pages = len(reader.pages)
+    num_pages = 0
+    with open(pdf_path, "rb") as f:
+            reader = PyPDF2.PdfReader(f)
+            num_pages = len(reader.pages)
 
     toimages(pdf_path,output_path)
     llm = init_llm()

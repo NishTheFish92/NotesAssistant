@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 import os
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.embeddings import HuggingFaceBgeEmbeddings
-
 def init_llm():
     load_dotenv()
     api_key = os.environ.get("GOOGLE_API_KEY")

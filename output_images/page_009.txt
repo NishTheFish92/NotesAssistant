@@ -1,7 +1,0 @@
-The image is a slide titled "Asynchronous Data Transfer Methods". The slide focuses on "Source Initiated Strobe for Data Transfer".
-
-The slide lists the following points: The source unit places data on the data bus and activates the Strobe pulse. The data bus carries binary information from source to destination. Information on the data bus remains in an active state until the data is received by the destination. The destination unit uses a falling edge to transfer data. The source removes data from the bus and disables the Strobe pulse.
-
-The slide also lists the following points: First, the source puts data on the data bus and turns on the strobe signal. Second, the destination, upon seeing the ON signal of the strobe, reads data from the data bus. Third, after reading data from the data bus by the destination, the strobe gets OFF. The slide also states that the figure shows that first data is put on the data bus and then the strobe signal gets active.
-
-The slide includes a block diagram showing a source unit connected to a destination unit via a data bus and a strobe line. The slide also includes a timing diagram showing the data bus and strobe signals. The data bus signal goes high before the strobe signal goes high. The data bus signal remains high while the strobe signal is high. The data bus signal goes low after the strobe signal goes low.

@@ -1,3 +1,0 @@
-The image is a slide or presentation about types of buffering. The title "Types of Buffering" is at the top in a dark green font. Below the title, there is a bulleted list of three types of buffering: "Single buffering," "Double buffering," and "Circular buffering."
-
-To the right of the bulleted list, there is a diagram titled "Types of Buffer" in red font. The diagram consists of three connected circles. The first circle is dark blue and labeled "01 Single Buffer." The second circle is orange and labeled "02 Double Buffer." The third circle is light blue and labeled "03 Circular Buffer." The circles are connected by thin lines.
