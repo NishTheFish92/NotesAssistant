@@ -13,4 +13,4 @@ wheels/
 .env
 
 #Output images
-output_images/
+output_folder/

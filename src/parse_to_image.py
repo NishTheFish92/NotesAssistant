@@ -27,5 +27,5 @@ def pdf_to_images(pdf_path, output_path):
     for i, image in enumerate(images):
         image_filename = os.path.join(output_path, f'page_{i+1:03}.jpg')
         pdflen+=1
-        image.save(image_filename, 'JPG')
+        image.save(image_filename, 'JPEG')
     return pdflen
