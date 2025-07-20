@@ -34,13 +34,13 @@ cd NotesAssistant
 
 
 ### 2. Install dependencies
-#### UV Installation
+#### Install via UV
 ```
 uv venv
 uv sync
 ```
 
-#### Pip installation
+#### Install using pip
 
 ```
 pip install -r requirements.txt
@@ -53,14 +53,12 @@ Create a .env file and add your API key
 GOOGLE_API_KEY=your-key
 ```
 
-### 4. Add professor notes
-Add your PPT (In pdf format) or PDF in the PDFs folder.
 ### 5. Embedding PDF for querying
 Run the train.py file with the arguement as the path to your pdf file.
 ```
 python train.py <path_to_your_pdf>
 ```
-## Usage
+## How to query
 Execute the following command
 ```
 python run.py

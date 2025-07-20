@@ -1,10 +1,24 @@
+"""
+Chain creation utilities for NotesAssistant.
+Links prompts, retrievers, and LLMs for answering questions.
+"""
+
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import create_retrieval_chain
 
 
-def chainer(vectorstore,llm):
-    #Links the prompt, retriever and the LLM
+def chainer(vectorstore, llm):
+    """
+    Links the prompt, retriever, and LLM to create a retrieval chain.
+
+    Args:
+        vectorstore: The vector store for document retrieval.
+        llm: The language model instance.
+
+    Returns:
+        RetrievalChain: The constructed retrieval chain.
+    """
     prompt = ChatPromptTemplate.from_template("""
     Use the following context to answer the question at the end. 
     Answer in paragraphs with no formatting. Headings can be shown with the help of colons.
@@ -26,6 +40,16 @@ def chainer(vectorstore,llm):
     retrieval_chain = create_retrieval_chain(retriever, document_chain)
     return retrieval_chain
 
-def print_response(retrieval_chain,prompt):
+def print_response(retrieval_chain, prompt):
+    """
+    Invokes the retrieval chain with a prompt and prints the answer.
+
+    Args:
+        retrieval_chain: The retrieval chain to use.
+        prompt (str): The question or prompt to send.
+
+    Returns:
+        None
+    """
     response = retrieval_chain.invoke({"input":prompt})
     print(response["answer"])

@@ -1,7 +1,7 @@
-from src import *
+from src import pdf_to_images,init_embeddings,init_llm,img_to_txt,embed_documents
 import PyPDF2
 import argparse
-
+from settings import OUTPUT_PATH
 
 def main():
     parser = argparse.ArgumentParser(description="Train NotesAssistant with a PDF file.")
@@ -9,17 +9,11 @@ def main():
     args = parser.parse_args()
 
     pdf_path = args.pdf_path
-    output_path = './output_images'
-    num_pages = 0
-    with open(pdf_path, "rb") as f:
-            reader = PyPDF2.PdfReader(f)
-            num_pages = len(reader.pages)
-
-    toimages(pdf_path,output_path)
+    output_path = OUTPUT_PATH
+    num_pages = pdf_to_images(pdf_path,output_path)
     llm = init_llm()
     embeddings = init_embeddings()
-    img2txt(output_path, num_pages, llm)
-
+    img_to_txt(output_path, num_pages, llm)
     vectorstore = embed_documents(output_path, embeddings)
     vectorstore.save_local("faiss_index")
 
