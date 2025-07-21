@@ -6,6 +6,11 @@ from dotenv import load_dotenv
 import os
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.embeddings import HuggingFaceBgeEmbeddings
+import torch
+
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+model_kwargs = {'device': device}
+
 def init_llm():
     """
     Initializes and returns a Google Generative AI chat model.
@@ -34,7 +39,6 @@ def init_embeddings():
         HuggingFaceBgeEmbeddings: The initialized embeddings instance.
     """
     model_name = "BAAI/bge-base-en-v1.5"
-    model_kwargs = {'device': 'cuda'}
     encode_kwargs = {'normalize_embeddings': True}
     return HuggingFaceBgeEmbeddings(
         model_name=model_name,
