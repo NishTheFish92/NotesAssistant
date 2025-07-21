@@ -14,7 +14,7 @@ def main():
     llm = init_llm()
     embeddings = init_embeddings()
     img_to_txt(output_path, num_pages, llm)
-    vectorstore = embed_documents(output_path, embeddings)
+    vectorstore = embed_documents(output_path, embeddings,64) #Change the batch size depending on your system specifications.
     vectorstore.save_local("faiss_index")
 
     print("PPT indexed. Vector store saved to 'faiss_index'.")
