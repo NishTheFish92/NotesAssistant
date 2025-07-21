@@ -6,6 +6,8 @@ Links prompts, retrievers, and LLMs for answering questions.
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import create_retrieval_chain
+from tkhtmlview import HTMLLabel
+import tkinter as tk
 
 
 def chainer(vectorstore, llm):
@@ -21,7 +23,7 @@ def chainer(vectorstore, llm):
     """
     prompt = ChatPromptTemplate.from_template("""
     Use the following context to answer the question at the end. 
-    Answer in paragraphs with no formatting. Headings can be shown with the help of colons.
+    Answer in neat paragraphs with HTML formatting. Do not use backticks in your response.
     If the answer is not in the context, just say "I don't know"— do not make anything up.
     If the answer is in the context and the user specifies the statement "AOFS" which stands for "Answer only from slides" do not provide any other information other than what is in the context.
     In the event user does not specify that statement and If the answer is in the context, Explain the context using your own knowledge of that subject, it doesn't have to be in the context.
@@ -40,9 +42,19 @@ def chainer(vectorstore, llm):
     retrieval_chain = create_retrieval_chain(retriever, document_chain)
     return retrieval_chain
 
+def show_response_html_in_window(html_text):
+    window = tk.Tk()
+    window.title("NotesAssistant Response")
+    window.geometry("800x600")
+
+    html_label = HTMLLabel(window, html=html_text, background="white")
+    html_label.pack(expand=True, fill="both", padx=10, pady=10)
+
+    window.mainloop()
+
 def print_response(retrieval_chain, prompt):
     """
-    Invokes the retrieval chain with a prompt and prints the answer.
+    Invokes the retrieval chain with a prompt and displays the answer in a new window.
 
     Args:
         retrieval_chain: The retrieval chain to use.
@@ -52,4 +64,4 @@ def print_response(retrieval_chain, prompt):
         None
     """
     response = retrieval_chain.invoke({"input":prompt})
-    print(response["answer"])
+    show_response_html_in_window(response["answer"])
