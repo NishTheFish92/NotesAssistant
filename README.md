@@ -65,6 +65,9 @@ python run.py
 ```
 Happy learning!
 
+## Improvements
+- Implemented batching while embedding text. Changing the VRAM usage from ~4GB to <1GB
+
 ## Potential Improvements
 1. **Multiple PDF support:** The user can choose which PDF they want to query.
 
