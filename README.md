@@ -91,6 +91,6 @@ Happy learning!
 ## Known issues
 1. The application is unable to summarize the entire PDF effectively
 
-2. Responses can be than required where a a notable part of the response is redundant.
+2. Responses can be longer than required where a a notable part of the response is redundant.
 
 3. The method in which the PDF is embedded is not optimized and consumes a lot of API calls.
