@@ -13,6 +13,7 @@ def main():
     num_pages = pdf_to_images(pdf_path,output_path)
     llm = init_llm()
     embeddings = init_embeddings()
+    print("This will take a while...")
     img_to_txt(output_path, num_pages, llm)
     vectorstore = embed_documents(output_path, embeddings,64) #Change the batch size depending on your system specifications.
     vectorstore.save_local("faiss_index")

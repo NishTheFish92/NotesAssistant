@@ -1,7 +1,9 @@
 from langchain.vectorstores import FAISS
 from src import init_embeddings,init_llm
 from src import chainer,print_response
-
+"""
+Run this file to use a CLI version of NotesAssistant.
+"""
 embeddings = init_embeddings()
 llm = init_llm()
 vectorstore = FAISS.load_local("faiss_index",embeddings)
