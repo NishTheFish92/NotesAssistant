@@ -2,9 +2,7 @@ import streamlit as st
 from langchain.vectorstores import FAISS
 from utils import init_embeddings, init_llm
 from create_chains import chainer
-"""
-Streamlit web application for NotesAssistant.
-"""
+
 
 st.markdown("""
     <style>
