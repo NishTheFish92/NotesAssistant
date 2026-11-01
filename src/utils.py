@@ -4,29 +4,32 @@ Utility functions for initializing LLM and embedding models for NotesAssistant.
 
 from dotenv import load_dotenv
 import os
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai import ChatOpenAI
 from langchain.embeddings import HuggingFaceBgeEmbeddings
 import torch
+
+load_dotenv()
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 model_kwargs = {'device': device}
 
 def init_llm():
     """
-    Initializes and returns a Google Generative AI chat model.
+    Initializes and returns a chat model served by FreeLLMAPI.
 
-    Loads the API key from environment variables and sets up the model
-    with specific parameters.
+    FreeLLMAPI exposes an OpenAI-compatible endpoint, so ChatOpenAI is pointed
+    at it via FREELLM_BASE_URL and authenticated with FREELLM_API_KEY.
 
     Returns:
-        ChatGoogleGenerativeAI: The initialized LLM instance.
+        ChatOpenAI: The initialized LLM instance.
     """
-    load_dotenv()
-    api_key = os.environ.get("GOOGLE_API_KEY")
-    return ChatGoogleGenerativeAI(
-        model="gemini-2.0-flash",
-        convert_system_message_to_human=True,
-        temperature=0.0,
+    return ChatOpenAI(
+        model="auto",
+        api_key=os.getenv("FREELLM_API_KEY"),
+        base_url=os.getenv("FREELLM_BASE_URL", "http://localhost:3001/v1"),
+        temperature=0,
+        max_tokens=None,
+        max_retries=2,
     )
 
 def init_embeddings():
