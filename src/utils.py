@@ -2,16 +2,24 @@
 Utility functions for initializing LLM and embedding models for NotesAssistant.
 """
 
-from dotenv import load_dotenv
 import os
-from langchain_openai import ChatOpenAI
-from langchain.embeddings import HuggingFaceBgeEmbeddings
+
 import torch
+from dotenv import load_dotenv
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_openai import ChatOpenAI
+
+from settings import (
+    EMBEDDING_MODEL,
+    EMBEDDING_QUERY_INSTRUCTION,
+    LLM_BASE_URL_DEFAULT,
+    LLM_MODEL,
+)
 
 load_dotenv()
 
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
-model_kwargs = {'device': device}
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
 
 def init_llm():
     """
@@ -24,28 +32,31 @@ def init_llm():
         ChatOpenAI: The initialized LLM instance.
     """
     return ChatOpenAI(
-        model="auto",
+        model=LLM_MODEL,
         api_key=os.getenv("FREELLM_API_KEY"),
-        base_url=os.getenv("FREELLM_BASE_URL", "http://localhost:3001/v1"),
+        base_url=os.getenv("FREELLM_BASE_URL", LLM_BASE_URL_DEFAULT),
         temperature=0,
         max_tokens=None,
         max_retries=2,
     )
 
+
 def init_embeddings():
     """
-    Initializes and returns HuggingFace BGE embeddings.
+    Initializes and returns BGE embeddings on GPU if available.
 
-    Sets up the embedding model with CUDA device and normalization.
+    Documents are embedded as-is; queries get BGE's retrieval instruction
+    prepended, which is how BGE v1.5 is meant to be used for search.
 
     Returns:
-        HuggingFaceBgeEmbeddings: The initialized embeddings instance.
+        HuggingFaceEmbeddings: The initialized embeddings instance.
     """
-    model_name = "BAAI/bge-base-en-v1.5"
-    encode_kwargs = {'normalize_embeddings': True}
-    return HuggingFaceBgeEmbeddings(
-        model_name=model_name,
-        model_kwargs=model_kwargs,
-        encode_kwargs=encode_kwargs,
-        query_instruction="Represent this sentence for answering questions:"
+    return HuggingFaceEmbeddings(
+        model_name=EMBEDDING_MODEL,
+        model_kwargs={"device": device},
+        encode_kwargs={"normalize_embeddings": True},
+        query_encode_kwargs={
+            "normalize_embeddings": True,
+            "prompt": EMBEDDING_QUERY_INSTRUCTION,
+        },
     )

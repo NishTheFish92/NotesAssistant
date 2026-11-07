@@ -3,11 +3,14 @@ Document embedding utilities for NotesAssistant.
 Splits and embeds text documents for retrieval.
 """
 
-import os
 import math
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.schema import Document
-from langchain.vectorstores import FAISS
+import os
+
+from langchain_community.vectorstores import FAISS
+from langchain_core.documents import Document
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+from settings import CHUNK_OVERLAP, CHUNK_SIZE
 
 
 def embed_documents(output_path, embeddings, batch_size=32):
@@ -23,7 +26,7 @@ def embed_documents(output_path, embeddings, batch_size=32):
         FAISS: Vector store containing embedded documents.
     """
     output_path = os.path.join(output_path, "output_text")
-    splitter = RecursiveCharacterTextSplitter()
+    splitter = RecursiveCharacterTextSplitter(chunk_size=CHUNK_SIZE, chunk_overlap=CHUNK_OVERLAP)
     file_names = sorted([f for f in os.listdir(output_path) if f.endswith('.txt')])
     documents = []
 
@@ -49,3 +52,20 @@ def embed_documents(output_path, embeddings, batch_size=32):
             vectorstore.merge_from(batch_vs)
 
     return vectorstore
+
+
+def load_vectorstore(index_path, embeddings):
+    """
+    Loads a FAISS vector store saved by index.py.
+
+    FAISS stores its docstore with pickle, so loading needs explicit opt-in.
+    Only load indexes you created yourself.
+
+    Args:
+        index_path (str): Folder the index was saved to.
+        embeddings: Embedding model instance (must match the one used to build it).
+
+    Returns:
+        FAISS: The loaded vector store.
+    """
+    return FAISS.load_local(index_path, embeddings, allow_dangerous_deserialization=True)

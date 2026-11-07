@@ -23,7 +23,7 @@ This project allows you to query professor notes and PPTs using LLMs (Large Lang
 - Language: Python
 - Embedding: BGE-Base V1.5
 - Vector store: FAISS
-- LLM Provider: Gemini 2.0 Flash
+- LLM Provider: any OpenAI-compatible endpoint (FreeLLMAPI by default)
 - Frameworks: LangChain
 
 ## Getting started
@@ -38,8 +38,6 @@ cd NotesAssistant
 ### 2. Install dependencies
 #### Install via UV
 ```
-uv init
-uv venv
 uv sync
 ```
 
@@ -48,31 +46,34 @@ uv sync
 ```
 pip install -r requirements.txt
 ```
-> **Note:** It is recommended that you have a CUDA enabled system.
+On Windows, add `--extra-index-url https://download.pytorch.org/whl/cu130` so pip can find the CUDA build of PyTorch.
+
+> **Note:** It is recommended that you have a CUDA enabled system. `pdf2image` also needs Poppler installed (`sudo apt install poppler-utils` on Debian/Ubuntu).
 
 ### 3. Add your API key
-Create a .env file and add your API key
+Create a .env file with your FreeLLMAPI key and endpoint (the URL defaults to `http://localhost:3001/v1` if omitted)
 ```
-GOOGLE_API_KEY=your-key
+FREELLM_API_KEY=your-key
+FREELLM_BASE_URL=http://localhost:3001/v1
 ```
 
-### 5. Embedding PDF for querying
-Run the train.py file with the arguement as the path to your pdf file.
+### 4. Embedding PDF for querying
+Run index.py with the path to your PDF file as the argument.
 ```
-python train.py <path_to_your_pdf>
+python index.py <path_to_your_pdf>
 ```
 ## How to query
 ### Using streamlit
 Execute the following command
 ```
-streamlit run src/app.py
+streamlit run app.py
 ```
 
 ### CLI interface
 
 Execute the following command
 ```
-python run.py
+python run_cli.py
 ```
 Happy learning!
 

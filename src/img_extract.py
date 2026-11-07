@@ -3,7 +3,6 @@ Image extraction and description utilities for NotesAssistant.
 Handles conversion of images to text descriptions using LLM.
 """
 
-from langchain_core.output_parsers import StrOutputParser
 from langchain_core.messages import HumanMessage
 import base64
 from tenacity import retry, stop_after_attempt, wait_exponential
@@ -38,7 +37,7 @@ def img_to_llm(image_file_path, llm):
                 {"type": "text", "text": "Describe the image sent. Send it as plain text in paragraphs with no formatting"},
                 {
                     "type": "image_url",
-                    "image_url": {"url": f"data:image/png;base64,{encoded_image}"}
+                    "image_url": {"url": f"data:image/jpeg;base64,{encoded_image}"}
                 }
             ]
         )

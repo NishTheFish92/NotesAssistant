@@ -1,7 +1,7 @@
 import streamlit as st
-from langchain.vectorstores import FAISS
-from utils import init_embeddings, init_llm
-from create_chains import chainer
+
+from settings import INDEX_PATH
+from src import chainer, init_embeddings, init_llm, load_vectorstore
 
 
 st.markdown("""
@@ -66,7 +66,7 @@ with st.container():
     def get_chain():
         embeddings = init_embeddings()
         llm = init_llm()
-        vectorstore = FAISS.load_local("faiss_index", embeddings)
+        vectorstore = load_vectorstore(INDEX_PATH, embeddings)
         return chainer(vectorstore, llm)
 
     retrieval_chain = get_chain()
