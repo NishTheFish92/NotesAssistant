@@ -24,8 +24,9 @@ Code changes below are done but **not yet run**: they need `uv sync` first.
 - [ ] OCR prompt: transcribe the text faithfully, then describe the figures
 - [ ] Send the text layer as a hint next to each image
 - [ ] Batch about 5 pages per vision call, with results keyed by page number
-- [ ] Cache each page's result (file hash + page + prompt version), so re-runs make 0 calls
-- [ ] Make ingestion resumable, so a failed batch doesn't restart the whole document
+- [x] Cache each page's result (file hash + page + prompt/model/dpi hash), so re-runs make 0 calls
+- [x] Make ingestion resumable, so a failed batch doesn't restart the whole document
+- [x] One retry layer for vision calls: retry rate limits, timeouts and 5xx, fail fast on 503 and 4xx
 - [ ] Test a lower dpi (120–150 vs 200)
 - [ ] Optional: PPTX input (convert to PDF with LibreOffice)
 

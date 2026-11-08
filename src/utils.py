@@ -21,12 +21,16 @@ load_dotenv()
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 
-def init_llm():
+def init_llm(max_retries=2):
     """
     Initializes and returns a chat model served by FreeLLMAPI.
 
     FreeLLMAPI exposes an OpenAI-compatible endpoint, so ChatOpenAI is pointed
     at it via FREELLM_BASE_URL and authenticated with FREELLM_API_KEY.
+
+    Args:
+        max_retries (int): Retries done by the OpenAI client itself. Ingestion
+            passes 0 because img_to_llm already has its own retry policy.
 
     Returns:
         ChatOpenAI: The initialized LLM instance.
@@ -37,7 +41,7 @@ def init_llm():
         base_url=os.getenv("FREELLM_BASE_URL", LLM_BASE_URL_DEFAULT),
         temperature=0,
         max_tokens=None,
-        max_retries=2,
+        max_retries=max_retries,
     )
 
 

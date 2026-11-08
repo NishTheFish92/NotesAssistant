@@ -1,7 +1,14 @@
 import argparse
 
-from settings import EMBED_BATCH_SIZE, INDEX_PATH, OUTPUT_PATH
-from src import embed_documents, img_to_txt, init_embeddings, init_llm, pdf_to_images
+from settings import CACHE_PATH, EMBED_BATCH_SIZE, INDEX_PATH, OUTPUT_PATH
+from src import (
+    embed_documents,
+    img_to_txt,
+    init_embeddings,
+    init_llm,
+    page_cache_dir,
+    pdf_to_images,
+)
 
 
 def main():
@@ -10,10 +17,10 @@ def main():
     args = parser.parse_args()
 
     num_pages = pdf_to_images(args.pdf_path, OUTPUT_PATH)
-    llm = init_llm()
+    llm = init_llm(max_retries=0)  # img_to_llm does the retrying
     embeddings = init_embeddings()
     print("This will take a while...")
-    img_to_txt(OUTPUT_PATH, num_pages, llm)
+    img_to_txt(OUTPUT_PATH, num_pages, llm, page_cache_dir(args.pdf_path, CACHE_PATH))
     vectorstore = embed_documents(OUTPUT_PATH, embeddings, EMBED_BATCH_SIZE)
     vectorstore.save_local(INDEX_PATH)
 

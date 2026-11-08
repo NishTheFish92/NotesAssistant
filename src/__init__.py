@@ -6,7 +6,7 @@ Provides functionality for processing lecture notes and slides.
 from .utils import init_llm, init_embeddings
 from .create_chains import chainer, print_response
 from .document_embedder import embed_documents, load_vectorstore
-from .img_extract import img_to_txt
+from .img_extract import img_to_txt, page_cache_dir
 from .parse_to_image import pdf_to_images
 
 __all__ = [
@@ -17,5 +17,6 @@ __all__ = [
     'embed_documents',
     'load_vectorstore',
     'img_to_txt',
+    'page_cache_dir',
     'pdf_to_images',
 ]

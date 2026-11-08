@@ -5,12 +5,13 @@ Central configuration for NotesAssistant. Change values here, not in the modules
 # Paths
 OUTPUT_PATH = "./output_folder"   # page images and extracted text
 INDEX_PATH = "./faiss_index"      # saved FAISS vector store
+CACHE_PATH = "./cache/pages"      # extracted page text, reused across runs
 
 # Ingestion
 PDF_DPI = 200                     # render resolution for page images
 
 # Models
-LLM_MODEL = "auto"                # FreeLLMAPI model name; pin a specific model for evals
+LLM_MODEL = "auto:notesassistant"                # FreeLLMAPI model name; pin a specific model for evals
 LLM_BASE_URL_DEFAULT = "http://localhost:3001/v1"
 EMBEDDING_MODEL = "BAAI/bge-base-en-v1.5"
 EMBEDDING_QUERY_INSTRUCTION = "Represent this sentence for searching relevant passages: "

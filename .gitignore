@@ -14,3 +14,6 @@ wheels/
 
 #Output images
 output_folder/
+
+#Cached page text
+cache/
