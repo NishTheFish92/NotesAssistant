@@ -17,7 +17,8 @@ EMBEDDING_MODEL = "BAAI/bge-base-en-v1.5"
 EMBEDDING_QUERY_INSTRUCTION = "Represent this sentence for searching relevant passages: "
 
 # Chunking and retrieval
-CHUNK_SIZE = 4000                 # characters (RecursiveCharacterTextSplitter default)
-CHUNK_OVERLAP = 200
+CHUNK_IN_TOKENS = True            # False = old character split (use 4000 / 200 below), kept for the comparison
+CHUNK_SIZE = 450                  # BGE tokens; BGE truncates anything past 512
+CHUNK_OVERLAP = 50
 EMBED_BATCH_SIZE = 64             # lower this if you run out of GPU memory
 TOP_K = 4                         # chunks retrieved per question

@@ -9,8 +9,9 @@ import os
 from langchain_community.vectorstores import FAISS
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from transformers import AutoTokenizer
 
-from settings import CHUNK_OVERLAP, CHUNK_SIZE
+from settings import CHUNK_IN_TOKENS, CHUNK_OVERLAP, CHUNK_SIZE, EMBEDDING_MODEL
 
 
 def embed_documents(output_path, embeddings, batch_size=32):
@@ -26,18 +27,26 @@ def embed_documents(output_path, embeddings, batch_size=32):
         FAISS: Vector store containing embedded documents.
     """
     output_path = os.path.join(output_path, "output_text")
-    splitter = RecursiveCharacterTextSplitter(chunk_size=CHUNK_SIZE, chunk_overlap=CHUNK_OVERLAP)
+    if CHUNK_IN_TOKENS:
+        # Measure chunks with the embedding model's own tokenizer, so none get truncated
+        tokenizer = AutoTokenizer.from_pretrained(EMBEDDING_MODEL)
+        splitter = RecursiveCharacterTextSplitter.from_huggingface_tokenizer(
+            tokenizer, chunk_size=CHUNK_SIZE, chunk_overlap=CHUNK_OVERLAP
+        )
+    else:
+        splitter = RecursiveCharacterTextSplitter(chunk_size=CHUNK_SIZE, chunk_overlap=CHUNK_OVERLAP)
     file_names = sorted([f for f in os.listdir(output_path) if f.endswith('.txt')])
     documents = []
 
     for file_name in file_names:
         with open(os.path.join(output_path, file_name), 'r', encoding='utf-8') as f:
             text = f.read()
+        page = int(file_name.removeprefix("page_").removesuffix(".txt"))
         chunks = splitter.split_text(text)
         for i, chunk in enumerate(chunks):
             documents.append(Document(
                 page_content=chunk,
-                metadata={"source": file_name, "chunk_id": i}
+                metadata={"source": file_name, "page": page, "chunk_id": i}
             ))
 
     vectorstore = None

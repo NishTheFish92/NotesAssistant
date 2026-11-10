@@ -16,7 +16,7 @@ from tenacity import retry, retry_if_exception, stop_after_attempt, wait_exponen
 
 from settings import LLM_MODEL, PDF_DPI
 
-PAGE_PROMPT = "Describe the image sent. Send it as plain text in paragraphs with no formatting"
+PAGE_PROMPT = "Describe the image sent. Send it as plain text in paragraphs with no formatting. Describe only the content and figures, not colours, fonts or layout"
 
 
 def _is_transient(error):
