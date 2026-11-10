@@ -2,13 +2,13 @@
 Run this file to use a CLI version of NotesAssistant.
 """
 
-from settings import INDEX_PATH
+from settings import ANSWER_MODEL, INDEX_PATH
 from src import chainer, init_embeddings, init_llm, load_vectorstore, print_response
 
 
 def main():
     embeddings = init_embeddings()
-    llm = init_llm()
+    llm = init_llm(ANSWER_MODEL)
     vectorstore = load_vectorstore(INDEX_PATH, embeddings)
     rchain = chainer(vectorstore, llm)
 

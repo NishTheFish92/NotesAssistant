@@ -9,13 +9,13 @@ from langchain_core.prompts import ChatPromptTemplate
 from settings import TOP_K
 
 PROMPT = ChatPromptTemplate.from_template("""
-    Use the following context to answer the question at the end.
+    Answer the question using only the context below, which comes from the user's lecture notes.
+    Each part of the context starts with its page number, like [p. 3].
+    Cite the page after every claim in the same form, for example [p. 3] or [p. 3, p. 5].
+    Do not add facts from your own knowledge.
+    If the context does not answer the question, reply exactly: "The notes don't cover this." and nothing else.
     Answer in neatly formatted paragraphs and with Markdown formatting. Do not use backticks in your response.
-    If the answer is not in the context, just say "I don't know"— do not make anything up.
-    If the answer is in the context and the user specifies the statement "AOFS" which stands for "Answer only from slides" do not provide any other information other than what is in the context.
-    In the event user does not specify that statement and If the answer is in the context, Explain the context using your own knowledge of that subject, it doesn't have to be in the context.
-    Also include a fun explanation to the concept using different analogies.
-    Finally, include a very brief intuitive explanation which helps me get the basic intution of what's going on.
+
     Context:
     {context}
 
@@ -40,7 +40,7 @@ class RetrievalChain:
     def invoke(self, inputs):
         question = inputs["input"]
         docs = self.retriever.invoke(question)
-        context = "\n\n".join(doc.page_content for doc in docs)
+        context = "\n\n".join(f"[p. {doc.metadata['page']}]\n{doc.page_content}" for doc in docs)
         answer = self.answer_chain.invoke({"context": context, "input": question})
         return {"input": question, "context": docs, "answer": answer}
 
@@ -59,6 +59,11 @@ def chainer(vectorstore, llm):
     return RetrievalChain(vectorstore, llm)
 
 
+def source_pages(response):
+    """Sorted, de-duplicated page numbers of the chunks used for an answer."""
+    return sorted({doc.metadata["page"] for doc in response["context"]})
+
+
 def print_response(retrieval_chain, prompt):
     """
     Invokes the retrieval chain with a prompt and prints the answer to the console.
@@ -72,3 +77,4 @@ def print_response(retrieval_chain, prompt):
     """
     response = retrieval_chain.invoke({"input": prompt})
     print(response["answer"])
+    print("Retrieved pages:", ", ".join(str(p) for p in source_pages(response)))

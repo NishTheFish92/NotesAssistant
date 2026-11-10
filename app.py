@@ -1,7 +1,7 @@
 import streamlit as st
 
-from settings import INDEX_PATH
-from src import chainer, init_embeddings, init_llm, load_vectorstore
+from settings import ANSWER_MODEL, INDEX_PATH
+from src import chainer, init_embeddings, init_llm, load_vectorstore, source_pages
 
 
 st.markdown("""
@@ -65,7 +65,7 @@ with st.container():
     @st.cache_resource(show_spinner=False)
     def get_chain():
         embeddings = init_embeddings()
-        llm = init_llm()
+        llm = init_llm(ANSWER_MODEL)
         vectorstore = load_vectorstore(INDEX_PATH, embeddings)
         return chainer(vectorstore, llm)
 
@@ -74,6 +74,7 @@ with st.container():
     if st.button("Get Answer", key="get_answer_btn") and query:
         response = retrieval_chain.invoke({"input": query})
         st.markdown(response["answer"], unsafe_allow_html=True)
+        st.caption("Retrieved pages: " + ", ".join(str(p) for p in source_pages(response)))
 
  
     if query or response:
