@@ -77,6 +77,54 @@ python run_cli.py
 ```
 Happy learning!
 
+## Evaluation
+The pipeline is scored against a hand-written golden set (`eval/golden_set.jsonl`) of 58 questions on one deck of lecture slides on I/O organisation:
+
+| Type | Count | What it tests |
+|---|---|---|
+| single | 36 | answer is on one slide |
+| multi | 8 | answer spans several slides |
+| numeric | 4 | worked problems from the slides |
+| trap | 8 | on topic, but the slides don't cover it |
+| off_topic | 2 | different subject entirely |
+
+Trap and off-topic questions should get the refusal "The notes don't cover this."
+
+### Running it
+Run these from the repo root:
+```
+python -m eval.retrieval_eval      # hit@k, MRR, recall@k only (no LLM calls)
+python -m eval.answer_eval         # answer every question, then have a judge LLM grade it
+python -m eval.score               # print the metrics from eval/results.jsonl (no LLM calls)
+```
+`answer_eval` writes to `eval/results.jsonl` after every question, so a run that crashes can be resumed. The judge model (`JUDGE_MODEL` in `settings.py`) must be different from the answer model.
+
+To check the judge, run `python -m eval.score --sample 30`. Fill in the `human` field in `eval/judge_audit.json`, then run `python -m eval.score` again to see the agreement and Cohen's kappa.
+
+### Metrics
+- **hit@k / MRR / recall@k**: was an evidence slide in the top k chunks, how high was it ranked, and what share of the evidence slides were retrieved.
+- **correct**: the answer has the key facts of the reference and nothing that contradicts it.
+- **faithful**: every claim in the answer is in the retrieved chunks.
+- **wrong / missed refusals**: refusing an answerable question, or answering an unanswerable one.
+- **citations**: whether the `[p. N]` page tags point to retrieved slides and to evidence slides.
+
+### Results
+Answer model `gemini-3.5-flash-lite`, judge `nemotron-3.5-lightning-30b-a3b`, k = 4, chunks of 450 tokens:
+
+| Metric | Score |
+|---|---|
+| hit@4 | 45/48 (94%) |
+| MRR | 0.88 |
+| recall@4 | 0.88 |
+| correct | 42/45 (93%) |
+| faithful | 46/46 (100%) |
+| wrong refusals | 3/48 (6%) |
+| missed refusals | 1/10 (10%) |
+| citations to a retrieved slide | 173/173 (100%) |
+| citations to an evidence slide | 152/171 (89%) |
+
+The judge's verdicts were reviewed by hand. Five were corrected, and three golden references that asked for more than their question did were trimmed. The remaining failures are mostly cases where the slide with the needed fact wasn't retrieved (q03, q18, q28, q29, q32) and one over-strict refusal on a question that combines several slides (q48).
+
 ## Improvements
 - Implemented batching while embedding large amount of text. Changing the VRAM usage from ~4GB to <1GB
 - Added linux compatibility.
