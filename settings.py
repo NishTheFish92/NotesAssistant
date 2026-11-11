@@ -13,7 +13,7 @@ PDF_DPI = 200                     # render resolution for page images
 # Models
 LLM_MODEL = "auto:notesassistant"                # FreeLLMAPI model for OCR
 ANSWER_MODEL = "gemini-3.5-flash-lite"           # pinned so eval runs are comparable
-JUDGE_MODEL = "nvidia/nemotron-3.5-lightning:free"           # eval judge; must differ from ANSWER_MODEL
+JUDGE_MODEL = "nemotron-3.5-lightning-30b-a3b"   # eval judge; must differ from ANSWER_MODEL
 LLM_BASE_URL_DEFAULT = "http://localhost:3001/v1"
 EMBEDDING_MODEL = "BAAI/bge-base-en-v1.5"
 EMBEDDING_QUERY_INSTRUCTION = "Represent this sentence for searching relevant passages: "
